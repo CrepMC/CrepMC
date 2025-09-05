@@ -3,7 +3,7 @@
 📯 **Languages and Tools**  
 ---
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=html,css,js,react,nodejs,express,python,java,mysql,mongodb,git,github,vscode" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,react,nodejs,express,python,mongodb,git,github,vscode" />
 </p>
 
 📊 **GitHub Stats**  
