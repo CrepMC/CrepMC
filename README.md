@@ -1,16 +1,41 @@
-## Hi there 👋
+# 👋 Welcome to CrepMC's Profile  
 
-<!--
-**CrepMC/CrepMC** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+📯 **Languages and Tools**  
+---
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=html,css,js,react,nodejs,express,python,java,mysql,mongodb,git,github,vscode" />
+</p>
 
-Here are some ideas to get you started:
+📊 **GitHub Stats**  
+---
+<p align="center">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=CrepMC&show_icons=true&theme=tokyonight&hide_border=true" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=CrepMC&layout=compact&theme=tokyonight&langs_count=8&hide_border=true"/>
+</p>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+🔥 **Streak Stats**  
+---
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true" />
+</p>
+
+⚡ **Recent GitHub Activity**  
+---
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=CrepMC&theme=tokyo-night&hide_border=true"/>
+</p>
+
+🏆 **GitHub Trophies**  
+---
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=CrepMC&theme=tokyonight&column=7&margin-w=10&margin-h=10"/>
+</p>
+
+📫 **Contact Me**  
+---
+- **Name:** CrepMC  
+- **Email:** ducnhan02022009@gmail.com  
+- **GitHub:** [github.com/CrepMC](https://github.com/CrepMC)  
+
+---
+⭐️ From [CrepMC](https://github.com/CrepMC)
