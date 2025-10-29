@@ -16,7 +16,7 @@
 🔥 **Streak Stats**  
 ---
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true" />
+  [![GitHub Streak](https://streak-stats.demolab.com/?user=CrepMC)](https://git.io/streak-stats)
 </p>
 
 ⚡ **Recent GitHub Activity**  
