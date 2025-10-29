@@ -15,9 +15,7 @@
 
 🔥 **Streak Stats**  
 ---
-<p align="center">
   [![GitHub Streak](https://streak-stats.demolab.com/?user=CrepMC)](https://git.io/streak-stats)
-</p>
 
 ⚡ **Recent GitHub Activity**  
 ---
