@@ -15,7 +15,11 @@
 
 🔥 **Streak Stats**  
 ---
-  [![GitHub Streak](https://streak-stats.demolab.com/?user=CrepMC)](https://git.io/streak-stats)
+  <p float="left">
+  <a href="https://github.com/CrepMC"><img src="https://github-readme-stats.vercel.app/api?username=CrepMC&show_icons=true&theme=tokyonight" width="48%"></a>
+  <a href="https://github.com/CrepMC"><img src="https://github-readme-streak-stats.herokuapp.com/?user=CrepMC&theme=tokyonight" width="48%"></a>
+</p>
+
 
 ⚡ **Recent GitHub Activity**  
 ---
