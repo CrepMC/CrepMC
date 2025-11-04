@@ -8,7 +8,7 @@
 
 📊 **GitHub Stats**  
 ---
-[![CrepMC GitHub stats](https://github-readme-stats.vercel.app/api?username=CrepMC)](https://github.com/anuraghazra/github-readme-stats)
+[![CrepMC GitHub stats](https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&hide)](https://github.com/anuraghazra/github-readme-stats)
 
 🔥 **Streak Stats**  
 ---
