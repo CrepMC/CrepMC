@@ -2,18 +2,20 @@
 
 📯 **Languages and Tools**  
 ---
-<p align="left">
+<p align="center">
   <img src="https://skillicons.dev/icons?i=html,css,js,react,vite,vercel,nodejs,express,python,mongodb,git,github,vscode" />
 </p>
 
 📊 **GitHub Stats**  
 ---
-[![CrepMC GitHub stats](https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&hide)](https://github.com/anuraghazra/github-readme-stats)
-
+<p align="center">
+  [![CrepMC GitHub stats](https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&hide)](https://github.com/anuraghazra/github-readme-stats)
+</p>
 🔥 **Streak Stats**  
 ---
-[![GitHub Streak](https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true)](https://github.com/CrepMC)
-
+<p align="center">
+  [![GitHub Streak](https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true)](https://github.com/CrepMC)
+</p>
 
 ⚡ **Recent GitHub Activity**  
 ---
