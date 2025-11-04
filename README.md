@@ -9,12 +9,12 @@
 📊 **GitHub Stats**  
 ---
 <p align="center">
-  [![CrepMC GitHub stats](https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&hide)](https://github.com/anuraghazra/github-readme-stats)
+  <img src="https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&hide">
 </p>
 🔥 **Streak Stats**  
 ---
 <p align="center">
-  [![GitHub Streak](https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true)](https://github.com/CrepMC)
+  <img src="https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true>
 </p>
 
 ⚡ **Recent GitHub Activity**  
