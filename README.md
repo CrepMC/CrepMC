@@ -2,35 +2,43 @@
 
 🪕 **Languages and Tools**
 ---
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,react,vite,vercel,nodejs,express,python,mongodb,git,github,vscode" />
-</p>
+<div align="center">
+
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,vite,vercel,nodejs,express,python,mongodb,git,github,vscode)](https://skillicons.dev)
+
+</div>
 
 📊 **GitHub Stats**
 ---
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight" />
-</p>
+<div align="center">
+
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&show_icons=true&hide_border=true)](https://github.com/CrepMC)
+
+</div>
 
 🔥 **Streak Stats**
 ---
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true" />
-</p>
+<div align="center">
+
+[![GitHub Streak](https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true)](https://github.com/CrepMC)
+
+</div>
 
 ⚡ **Recent GitHub Activity**
 ---
-<p align="center">
-  <a href="https://github.com/CrepMC">
-    <img src="https://github-readme-activity-graph.vercel.app/graph?username=CrepMC&theme=tokyo-night&hide_border=true" />
-  </a>
-</p>
+<div align="center">
+
+[![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=CrepMC&theme=tokyo-night&hide_border=true)](https://github.com/CrepMC)
+
+</div>
 
 🏆 **GitHub Trophies**
 ---
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=CrepMC&theme=tokyonight&column=7&margin-w=10&margin-h=10" />
-</p>
+<div align="center">
+
+[![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=CrepMC&theme=tokyonight&column=7&margin-w=10&margin-h=10&no-frame=true)](https://github.com/CrepMC)
+
+</div>
 
 📫 **Contact Me**
 ---
