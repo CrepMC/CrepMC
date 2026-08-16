@@ -1,0 +1,260 @@
+name: Update Profile Cards
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/update-profile-cards.yml"
+  schedule:
+    # 06:17 every day in Vietnam. Using :17 avoids GitHub's busiest top-of-hour period.
+    - cron: "17 6 * * *"
+      timezone: "Asia/Ho_Chi_Minh"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-profile-cards
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v6
+
+      - name: Prepare temporary directory
+        run: mkdir -p profile/tmp
+
+      # ------------------------------------------------------------------
+      # Languages & Tools
+      # Cache the old skillicons.dev look locally. If the service is down,
+      # the previous good SVG stays in the repository.
+      # ------------------------------------------------------------------
+      - name: Refresh skill icons
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://skillicons.dev/icons?i=html,css,js,react,vite,vercel,nodejs,express,python,mongodb,git,github,vscode'
+          out='profile/tmp/skills.svg'
+
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 --max-time 45 \
+            "$url" -o "$out"
+
+          grep -qi '<svg' "$out"
+
+          if grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            echo 'Skill icon response looks like an error SVG.'
+            exit 1
+          fi
+
+          mv "$out" profile/skills.svg
+
+      # ------------------------------------------------------------------
+      # GitHub Stats
+      # 1) Try the exact old public URL to preserve the same appearance.
+      # 2) If it fails, use the current GitHub Readme Stats Action to render
+      #    a local static SVG instead.
+      # ------------------------------------------------------------------
+      - name: Try old GitHub Stats endpoint
+        id: fetch_stats
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://github-readme-stats.vercel.app/api?username=CrepMC&theme=tokyonight&show_icons=true&hide_border=true'
+          out='profile/tmp/stats.svg'
+
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 --max-time 45 \
+            "$url" -o "$out"
+
+          grep -qi '<svg' "$out"
+
+          if grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            echo 'Stats endpoint returned an error SVG.'
+            exit 1
+          fi
+
+      - name: Fallback - generate GitHub Stats locally
+        if: steps.fetch_stats.outcome == 'failure'
+        continue-on-error: true
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: username=${{ github.repository_owner }}&theme=tokyonight&show_icons=true&hide_border=true
+          path: profile/tmp/stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
+      - name: Publish valid GitHub Stats
+        if: always()
+        shell: bash
+        run: |
+          out='profile/tmp/stats.svg'
+          if [[ -s "$out" ]] && grep -qi '<svg' "$out" && \
+             ! grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            mv "$out" profile/stats.svg
+            echo 'Stats card updated.'
+          else
+            echo 'No valid new stats card; preserving previous profile/stats.svg.'
+          fi
+
+      # ------------------------------------------------------------------
+      # Streak Stats
+      # Same strategy: cache exact old card first, Action as fallback.
+      # ------------------------------------------------------------------
+      - name: Try old Streak Stats endpoint
+        id: fetch_streak
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://streak-stats.demolab.com?user=CrepMC&theme=tokyonight&hide_border=true'
+          out='profile/tmp/streak.svg'
+
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 --max-time 45 \
+            "$url" -o "$out"
+
+          grep -qi '<svg' "$out"
+
+          if grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            echo 'Streak endpoint returned an error SVG.'
+            exit 1
+          fi
+
+      - name: Fallback - generate Streak Stats locally
+        if: steps.fetch_streak.outcome == 'failure'
+        continue-on-error: true
+        uses: DenverCoder1/github-readme-streak-stats@main
+        with:
+          options: user=${{ github.repository_owner }}&theme=tokyonight&hide_border=true&disable_animations=true
+          path: profile/tmp/streak.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish valid Streak Stats
+        if: always()
+        shell: bash
+        run: |
+          out='profile/tmp/streak.svg'
+          if [[ -s "$out" ]] && grep -qi '<svg' "$out" && \
+             ! grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            mv "$out" profile/streak.svg
+            echo 'Streak card updated.'
+          else
+            echo 'No valid new streak card; preserving previous profile/streak.svg.'
+          fi
+
+      # ------------------------------------------------------------------
+      # Recent GitHub Activity
+      # The old endpoint currently works. We cache it locally so a future
+      # outage does not break the README at page-load time.
+      # ------------------------------------------------------------------
+      - name: Refresh GitHub Activity Graph
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://github-readme-activity-graph.vercel.app/graph?username=CrepMC&theme=tokyo-night&hide_border=true'
+          out='profile/tmp/activity.svg'
+
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 --max-time 60 \
+            "$url" -o "$out"
+
+          grep -qi '<svg' "$out"
+
+          if grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            echo 'Activity endpoint returned an error SVG.'
+            exit 1
+          fi
+
+          mv "$out" profile/activity.svg
+
+      # ------------------------------------------------------------------
+      # GitHub Trophies
+      # First cache the exact old card. If the public endpoint is down,
+      # try ryo-ma's local SVG generator as a fallback.
+      # ------------------------------------------------------------------
+      - name: Try old GitHub Trophies endpoint
+        id: fetch_trophy
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://github-profile-trophy.vercel.app/?username=CrepMC&theme=tokyonight&column=7&margin-w=10&margin-h=10&no-frame=true'
+          out='profile/tmp/trophy.svg'
+
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 --max-time 60 \
+            "$url" -o "$out"
+
+          grep -qi '<svg' "$out"
+
+          if grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            echo 'Trophy endpoint returned an error SVG.'
+            exit 1
+          fi
+
+      - name: Setup Deno for trophy fallback
+        if: steps.fetch_trophy.outcome == 'failure'
+        continue-on-error: true
+        uses: denoland/setup-deno@v2
+        with:
+          # ryo-ma's current generator was written against Deno 1.x.
+          deno-version: v1.x
+
+      - name: Fallback - generate trophies locally
+        if: steps.fetch_trophy.outcome == 'failure'
+        continue-on-error: true
+        shell: bash
+        env:
+          GITHUB_TOKEN1: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/github-profile-trophy
+          git clone --depth 1 https://github.com/ryo-ma/github-profile-trophy.git /tmp/github-profile-trophy
+
+          deno run --allow-net --allow-env --allow-read --allow-write \
+            /tmp/github-profile-trophy/render_svg.ts \
+            "${{ github.repository_owner }}" \
+            "$GITHUB_WORKSPACE/profile/tmp/trophy.svg" \
+            "tokyonight"
+
+      - name: Publish valid GitHub Trophies
+        if: always()
+        shell: bash
+        run: |
+          out='profile/tmp/trophy.svg'
+          if [[ -s "$out" ]] && grep -qi '<svg' "$out" && \
+             ! grep -Eqi 'failed to retrieve|something went wrong|deployment[_ ]paused|application error|internal server error|rate limit' "$out"; then
+            mv "$out" profile/trophy.svg
+            echo 'Trophy card updated.'
+          else
+            echo 'No valid new trophy card; preserving previous profile/trophy.svg.'
+          fi
+
+      - name: Remove temporary files
+        if: always()
+        run: rm -rf profile/tmp
+
+      - name: Commit refreshed profile cards
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add profile/*.svg
+
+          if git diff --cached --quiet; then
+            echo 'No profile card changes.'
+            exit 0
+          fi
+
+          git commit -m "chore: refresh profile cards"
+          git push
